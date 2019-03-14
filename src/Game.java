@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.concurrent.ThreadLocalRandom;
 
-/* TODO: * Display word as underscores (such to not give the word away).
+/* TODO: * Add ability to randomly select a textfile containing words of a specific category.
+         * Display word as underscores (such to not give the word away).
          * Add procedural revealing of letters based on correct guesses.
          * Add logic to not penalise users for repeated guesses (hashmap?).
          * Create functionality to display all guesses after each turn.
@@ -12,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /* Runs the main functions of the game */
 public class Game {
+    public static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
     private ArrayList<String> wordList = new ArrayList<>();
 
     public Game(){}
@@ -54,7 +56,12 @@ public class Game {
      * used in the game. ThreadLocalRandom used for better pseudo-random number generation.
      */
     public String selectWord(ArrayList<String> wordList){
-        int random = ThreadLocalRandom.current().nextInt(0,(wordList.size()));
-        return wordList.get(random);
+        return wordList.get(RAND.nextInt(0,(wordList.size())));
     }
+/*
+    public String displayWord(String word){
+        String updatedWord;
+
+     }
+*/
 }
