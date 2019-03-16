@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /* TODO: * Add ability to randomly select a textfile containing words of a specific category.
-         * Add logic to not penalise users for repeated guesses (hashmap?).
+         * Add logic to not penalise users for repeated guesses (hashmap?) (3/4 done).
          * Create functionality to display all guesses after each turn.
  */
 
@@ -67,29 +67,23 @@ public class Game {
         return wordList.get(RAND.nextInt(0,(wordList.size())));
     }
 
-    /* Returns 0 if the character HASN'T been guessed and IS in the word.
-     * Returns 1 if the character HASN'T been guessed and ISN'T int the word.
-     * Returns 2 if the character HAS been guessed, or the input isn't a single character.
-     *
-     * This is used in a switch in the main function to run code based on return cases.
-     */
-    public int guessChar(String guess){
+    public GuessResult guessString(String guess){
         if(guess.length() == 1) {
             if (guessedChar.containsKey(guess)) {
                 guessedChar.replace(guess, true);
-                return 0;
+                return GuessResult.SUCCESS;
             }
-            else if(guessedChar.get(guess)){
+            if(guessedChar.get(guess)){
                 System.out.println("You've already tried " + guess + "!");
-                return 2;
+                return GuessResult.ALREADY_GUESSED;
             }
             else {
                 System.out.println(guess + " is not in the word!");
-                return 1;
+                return GuessResult.INVALID_GUESSED;
             }
         }else{
             System.out.println("Please enter only 1 character");
-            return 2;
+            return GuessResult.NOT_A_CHAR;
         }
     }
 
@@ -111,7 +105,13 @@ public class Game {
     }
 
     public int turnsRemaining(){
-        turns--;
-        return turns;
+        return --turns;
+    }
+
+    enum GuessResult{
+        SUCCESS,
+        NOT_A_CHAR,
+        ALREADY_GUESSED,
+        INVALID_GUESSED
     }
 }
