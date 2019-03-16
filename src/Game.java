@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.io.File;
@@ -13,8 +15,16 @@ import java.io.FileNotFoundException;
 
 /* Runs the main functions of the game */
 public class Game {
+    private static final HashMap<String, Boolean> guessedChar;
     public static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
     private ArrayList<String> wordList = new ArrayList<>();
+
+    static{
+        guessedChar = new HashMap<>();
+        for(char c = 'a'; c < 'z'; c++){
+            guessedChar.put(String.valueOf(c),false);
+        }
+    }
 
     public Game(){}
 
@@ -58,10 +68,34 @@ public class Game {
     public String selectWord(ArrayList<String> wordList){
         return wordList.get(RAND.nextInt(0,(wordList.size())));
     }
-/*
-    public String displayWord(String word){
-        String updatedWord;
 
-     }
-*/
+    public void guessChar(String guess){
+        if(guess.length() == 1) {
+            if (guessedChar.containsKey(guess) && guessedChar.containsValue(false)) {
+                guessedChar.replace(guess, true);
+            } else {
+                System.out.println(guess + " has already been guessed!");
+            }
+        }else{
+            System.out.println("Please enter only 1 character");
+        }
+    }
+/*
+    public void displayWord(String word) {
+        char [] charArray = word.toCharArray();
+        for(int i = 0; i < word.length(); i++){
+            if(guessedChar.containsKey(String.valueOf(charArray[i]))){
+                if(guessedChar.get(String.valueOf(charArray[i]))){
+                    System.out.print(charArray[i]);
+                }
+                else if(guessedChar.get(String.valueOf(charArray[i]))){
+                    System.out.print("_");
+                }
+            }
+            else{
+                System.out.print(charArray[i]);
+            }
+        }
+    }
+    */
 }
