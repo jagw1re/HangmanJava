@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/* TODO: * Add ability to randomly select a textfile containing words of a specific category.
-         * Add logic to not penalise users for repeated guesses (hashmap?) (3/4 done).
+/* TODO: * Add logic to not penalise users for repeated guesses (hashmap?) (3/4 done).
          * Create functionality to display all guesses after each turn.
  */
 
@@ -14,8 +14,10 @@ import java.io.FileNotFoundException;
 public class Game {
     private static final HashMap<String, Boolean> guessedChar;
     public static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
-    private int turns = 8;
     private ArrayList<String> wordList = new ArrayList<>();
+    private ArrayList<String> wrongGuess = new ArrayList<>();
+    private HashMap<Character, Integer> uniqueChar = new HashMap<>();
+    private String selectedWord;
 
     static{
         guessedChar = new HashMap<>();
@@ -63,13 +65,13 @@ public class Game {
      * the size of the array (exclusive) such that a single word can be selected and
      * used in the game. ThreadLocalRandom used for better pseudo-random number generation.
      */
-    public String selectWord(ArrayList<String> wordList){
-        return wordList.get(RAND.nextInt(0,(wordList.size())));
+    public void selectWord(ArrayList<String> wordList){
+        this.selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
     }
 
     public GuessResult guessString(String guess){
         if(guess.length() == 1) {
-            if (guessedChar.containsKey(guess)) {
+            if (guessedChar.containsKey(guess) && !guessedChar.get(guess) && selectedWord.contains(guess)) {
                 guessedChar.replace(guess, true);
                 return GuessResult.SUCCESS;
             }
@@ -79,6 +81,7 @@ public class Game {
             }
             else {
                 System.out.println(guess + " is not in the word!");
+                wrongGuess.add(guess);
                 return GuessResult.INVALID_GUESSED;
             }
         }else{
@@ -87,9 +90,9 @@ public class Game {
         }
     }
 
-    public void displayWord(String word) {
-        char [] charArray = word.toCharArray();
-        for(int i = 0; i < word.length(); i++){
+    public void displayWord() {
+        char [] charArray = selectedWord.toCharArray();
+        for(int i = 0; i < selectedWord.length(); i++){
             if(guessedChar.containsKey(String.valueOf(charArray[i]))){
                 if(guessedChar.get(String.valueOf(charArray[i]))){
                     System.out.print(charArray[i]);
@@ -102,10 +105,46 @@ public class Game {
                 System.out.print(charArray[i]);
             }
         }
+        System.out.println();
+        System.out.println("-----------------------------");
     }
 
-    public int turnsRemaining(){
-        return --turns;
+    public void showFailedGuesses() {
+        for (String chars : wrongGuess){
+            System.out.printf("%-5s", chars);
+        }
+        System.out.println();
+    }
+
+    public boolean isFinished(){
+
+        int unique = 0;
+        int input = 0;
+
+        char[] charArray = selectedWord.toCharArray();
+
+        for(char c : charArray){
+            if(!uniqueChar.containsKey(c)){
+                uniqueChar.put(c,1);
+                unique++;
+            }
+        }
+
+        for(Map.Entry<String, Boolean> letters : guessedChar.entrySet()){
+            if(letters.getValue()){
+                input++;
+            }
+        }
+
+        if(unique == 0 || input == 0){
+            return false;
+        }
+
+        if(unique == input){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     enum GuessResult{
