@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 /* TODO: * Add ability to randomly select a textfile containing words of a specific category.
-         * Display word as underscores (such to not give the word away).
-         * Add procedural revealing of letters based on correct guesses.
          * Add logic to not penalise users for repeated guesses (hashmap?).
          * Create functionality to display all guesses after each turn.
  */
@@ -17,11 +14,12 @@ import java.io.FileNotFoundException;
 public class Game {
     private static final HashMap<String, Boolean> guessedChar;
     public static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
+    private int turns = 8;
     private ArrayList<String> wordList = new ArrayList<>();
 
     static{
         guessedChar = new HashMap<>();
-        for(char c = 'a'; c < 'z'; c++){
+        for(char c = 'a'; c <= 'z'; c++){
             guessedChar.put(String.valueOf(c),false);
         }
     }
@@ -69,18 +67,32 @@ public class Game {
         return wordList.get(RAND.nextInt(0,(wordList.size())));
     }
 
-    public void guessChar(String guess){
+    /* Returns 0 if the character HASN'T been guessed and IS in the word.
+     * Returns 1 if the character HASN'T been guessed and ISN'T int the word.
+     * Returns 2 if the character HAS been guessed, or the input isn't a single character.
+     *
+     * This is used in a switch in the main function to run code based on return cases.
+     */
+    public int guessChar(String guess){
         if(guess.length() == 1) {
-            if (guessedChar.containsKey(guess) && guessedChar.containsValue(false)) {
+            if (guessedChar.containsKey(guess)) {
                 guessedChar.replace(guess, true);
-            } else {
-                System.out.println(guess + " has already been guessed!");
+                return 0;
+            }
+            else if(guessedChar.get(guess)){
+                System.out.println("You've already tried " + guess + "!");
+                return 2;
+            }
+            else {
+                System.out.println(guess + " is not in the word!");
+                return 1;
             }
         }else{
             System.out.println("Please enter only 1 character");
+            return 2;
         }
     }
-/*
+
     public void displayWord(String word) {
         char [] charArray = word.toCharArray();
         for(int i = 0; i < word.length(); i++){
@@ -88,7 +100,7 @@ public class Game {
                 if(guessedChar.get(String.valueOf(charArray[i]))){
                     System.out.print(charArray[i]);
                 }
-                else if(guessedChar.get(String.valueOf(charArray[i]))){
+                else if(!guessedChar.get(String.valueOf(charArray[i]))){
                     System.out.print("_");
                 }
             }
@@ -97,5 +109,9 @@ public class Game {
             }
         }
     }
-    */
+
+    public int turnsRemaining(){
+        turns--;
+        return turns;
+    }
 }
