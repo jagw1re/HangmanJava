@@ -12,17 +12,15 @@ import java.io.FileNotFoundException;
 
 /* Runs the main functions of the game */
 public class Game {
-    private static final HashMap<String, Boolean> guessedChar;
+    private static final HashMap<String, GuessResult> guessedChar;
     public static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
     private ArrayList<String> wordList = new ArrayList<>();
-    private ArrayList<String> wrongGuess = new ArrayList<>();
-    private HashMap<Character, Integer> uniqueChar = new HashMap<>();
     private String selectedWord;
 
     static{
         guessedChar = new HashMap<>();
         for(char c = 'a'; c <= 'z'; c++){
-            guessedChar.put(String.valueOf(c),false);
+            guessedChar.put(String.valueOf(c),GuessResult.NOT_IN_WORD);
         }
     }
 
@@ -67,42 +65,54 @@ public class Game {
      */
     public void selectWord(ArrayList<String> wordList){
         this.selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
+        System.out.println(selectedWord);
     }
 
-    public GuessResult guessString(String guess){
-        if(guess.length() == 1) {
-            if (guessedChar.containsKey(guess) && !guessedChar.get(guess) && selectedWord.contains(guess)) {
-                guessedChar.replace(guess, true);
-                return GuessResult.SUCCESS;
-            }
-            if(guessedChar.get(guess)){
-                System.out.println("You've already tried " + guess + "!");
-                return GuessResult.ALREADY_GUESSED;
-            }
-            else {
-                System.out.println(guess + " is not in the word!");
-                wrongGuess.add(guess);
-                return GuessResult.INVALID_GUESSED;
-            }
-        }else{
-            System.out.println("Please enter only 1 character");
-            return GuessResult.NOT_A_CHAR;
+    public void analyseWord(){
+        char[] word = selectedWord.toCharArray();
+
+        for(char c : word){
+            guessedChar.put(String.valueOf(c), GuessResult.NOT_GUESSED);
         }
     }
 
+    public GuessResult guessString(String guess){
+        if(guess.length() == 1){
+            switch(guessedChar.get(guess)){
+                case NOT_GUESSED:
+                    guessedChar.replace(guess, GuessResult.GUESSED_SUCESS);
+                    return GuessResult.GUESSED_SUCESS;
+                case NOT_IN_WORD:
+                    System.out.println(guess + " is not in the word!");
+                    guessedChar.replace(guess, GuessResult.GUESSED_WRONG);
+                    return GuessResult.GUESSED_WRONG;
+                case GUESSED_SUCESS:
+                    System.out.println("You've already correctly guessed " + guess + "!");
+                    return GuessResult.ALREADY_GUESSED;
+                case GUESSED_WRONG:
+                    System.out.println("You've already tried " + guess + "!");
+                    return GuessResult.ALREADY_GUESSED;
+                    default:
+                        System.out.println("Unhandled error!");
+            }
+        }
+        return GuessResult.NOT_A_CHAR;
+    }
+
     public void displayWord() {
-        char [] charArray = selectedWord.toCharArray();
+        char[] strToArray = selectedWord.toCharArray();
         for(int i = 0; i < selectedWord.length(); i++){
-            if(guessedChar.containsKey(String.valueOf(charArray[i]))){
-                if(guessedChar.get(String.valueOf(charArray[i]))){
-                    System.out.print(charArray[i]);
+            String letter = String.valueOf(strToArray[i]);
+            if(guessedChar.containsKey(letter)){
+                if(guessedChar.get(letter) == GuessResult.GUESSED_SUCESS){
+                    System.out.print(letter);
                 }
-                else if(!guessedChar.get(String.valueOf(charArray[i]))){
+                else if(guessedChar.get(letter) == GuessResult.NOT_GUESSED){
                     System.out.print("_");
                 }
             }
             else{
-                System.out.print(charArray[i]);
+                System.out.print(letter);
             }
         }
         System.out.println();
@@ -110,47 +120,21 @@ public class Game {
     }
 
     public void showFailedGuesses() {
-        for (String chars : wrongGuess){
-            System.out.printf("%-5s", chars);
+        for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet()){
+            if(letters.getValue() == GuessResult.GUESSED_WRONG){
+                System.out.printf("%-5s", letters.getKey());
+            }
         }
         System.out.println();
     }
 
-    public boolean isFinished(){
-
-        int unique = 0;
-        int input = 0;
-
-        char[] charArray = selectedWord.toCharArray();
-
-        for(char c : charArray){
-            if(!uniqueChar.containsKey(c)){
-                uniqueChar.put(c,1);
-                unique++;
-            }
-        }
-
-        for(Map.Entry<String, Boolean> letters : guessedChar.entrySet()){
-            if(letters.getValue()){
-                input++;
-            }
-        }
-
-        if(unique == 0 || input == 0){
-            return false;
-        }
-
-        if(unique == input){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     enum GuessResult{
-        SUCCESS,
-        NOT_A_CHAR,
+        GUESSED_SUCESS,
+        GUESSED_WRONG,
         ALREADY_GUESSED,
-        INVALID_GUESSED
+        NOT_A_CHAR,
+        NOT_GUESSED,
+        NOT_IN_WORD,
+
     }
 }
