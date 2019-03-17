@@ -6,10 +6,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/* TODO: * Add logic to not penalise users for repeated guesses (hashmap?) (3/4 done).
-         * Create functionality to display all guesses after each turn.
- */
-
 /* Runs the main functions of the game */
 public class Game {
     private static final HashMap<String, GuessResult> guessedChar;
@@ -65,14 +61,15 @@ public class Game {
      */
     public void selectWord(ArrayList<String> wordList){
         this.selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
-        System.out.println(selectedWord);
     }
 
     public void analyseWord(){
         char[] word = selectedWord.toCharArray();
 
         for(char c : word){
-            guessedChar.put(String.valueOf(c), GuessResult.NOT_GUESSED);
+            if(c >= 'a' && c <= 'z') {
+                guessedChar.put(String.valueOf(c), GuessResult.NOT_GUESSED);
+            }
         }
     }
 
@@ -101,6 +98,7 @@ public class Game {
 
     public void displayWord() {
         char[] strToArray = selectedWord.toCharArray();
+
         for(int i = 0; i < selectedWord.length(); i++){
             String letter = String.valueOf(strToArray[i]);
             if(guessedChar.containsKey(letter)){
@@ -116,7 +114,6 @@ public class Game {
             }
         }
         System.out.println();
-        System.out.println("-----------------------------");
     }
 
     public void showFailedGuesses() {

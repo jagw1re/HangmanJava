@@ -14,9 +14,11 @@ public class Main {
         hangman.selectWord(hangman.getList());
         hangman.analyseWord();
 
+        hangman.displayWord();
+
         while(turns > 0){
             String guess = input.next();
-
+            System.out.println("**********************");
             switch(hangman.guessString(guess)){
                 case GUESSED_SUCESS:
                     System.out.println("Correct, you have " + turns + " turns remaining.");
@@ -24,7 +26,8 @@ public class Main {
                     break;
                 case GUESSED_WRONG:
                     hangman.displayWord();
-                    System.out.println("You've guessed:");
+                    System.out.println("---------------------");
+                    System.out.println("You've incorrectly guessed:");
                     hangman.showFailedGuesses();
                     break;
                 case NOT_A_CHAR:
@@ -32,6 +35,7 @@ public class Main {
                     break;
                 case NOT_IN_WORD:
                     hangman.displayWord();
+                    System.out.println("---------------------");
                     hangman.showFailedGuesses();
                     turns--;
                     break;
@@ -42,7 +46,6 @@ public class Main {
                     System.out.println("Unhandled case!");
                     break;
             }
-
         }
     }
 }
