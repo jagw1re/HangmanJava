@@ -7,11 +7,10 @@ public class Main {
      */
     public static void main(String[] args){
         Game hangman = new Game();
-        Scanner input = new Scanner(System.in);;
+        Scanner input = new Scanner(System.in);
         int turns = 8;
 
         hangman.scanWords();
-        hangman.selectWord(hangman.getList());
         hangman.analyseWord();
 
         hangman.displayWord();

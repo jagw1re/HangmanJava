@@ -39,6 +39,8 @@ public class Game {
                 String line = wordScanner.nextLine();
                 wordList.add(line);
             }
+            selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
+
         }
         catch(FileNotFoundException exception){
             System.out.println("Error: File not found!");
@@ -55,13 +57,7 @@ public class Game {
         }
     }
 
-    /* Takes the list being used and generates a number between 0 (inclusive) and
-     * the size of the array (exclusive) such that a single word can be selected and
-     * used in the game. ThreadLocalRandom used for better pseudo-random number generation.
-     */
-    public void selectWord(ArrayList<String> wordList){
-        this.selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
-    }
+
 
     public void analyseWord(){
         char[] word = selectedWord.toCharArray();
