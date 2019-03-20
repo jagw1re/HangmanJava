@@ -76,7 +76,6 @@ public class Game {
                     guessedChar.replace(guess, GuessResult.GUESSED_SUCESS);
                     return GuessResult.GUESSED_SUCESS;
                 case NOT_IN_WORD:
-                    System.out.println(guess + " is not in the word!");
                     guessedChar.replace(guess, GuessResult.GUESSED_WRONG);
                     return GuessResult.GUESSED_WRONG;
                 case GUESSED_SUCESS:
@@ -119,6 +118,19 @@ public class Game {
             }
         }
         System.out.println();
+    }
+
+    public String getSelectedWord(){
+        return selectedWord;
+    }
+
+    public boolean isFinished(){
+        for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet()){
+            if(letters.getValue() == GuessResult.NOT_GUESSED){
+                return false;
+            }
+        }
+        return true;
     }
 
     enum GuessResult{
