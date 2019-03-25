@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * Main contains the main function of the program, and calls most of the Game class functionality.
+ * Please see the {@link Game} class for functionality.
+ * @author Ben Carpenter
+ */
 public class Main {
-    /*TODO: * Get user input of characters. (half done)
-            * Display hangman progress relative to unsuccessful guesses.
-            * Loss, win messages.
-     */
     public static void main(String[] args){
         Game hangman = new Game();
         Scanner input = new Scanner(System.in);
@@ -24,13 +25,13 @@ public class Main {
         while(turns > 0 && !hangman.isFinished()){
             String guess = input.next();
             switch(hangman.guessString(guess.toLowerCase())){
-                case GUESSED_SUCESS:
-                    System.out.println("Correct! You still have " + turns + " turns remaining!");
+                case GUESSED_SUCCESS:
+                    System.out.println("Correct! You still have " + turns + " turn(s) remaining!");
                     hangman.displayWord();
                     System.out.println("**********************");
                     break;
                 case GUESSED_WRONG:
-                    System.out.println(guess + " is not in the word! " + --turns + " turns remain!");
+                    System.out.println(guess + " is not in the word! " + --turns + " turn(s) remain!");
                     hangman.displayWord();
                     System.out.println("---------------------");
                     System.out.println("You've incorrectly guessed:");
@@ -60,7 +61,7 @@ public class Main {
             System.out.println("You're out of turns!");
             System.out.println("The word was: " + hangman.getSelectedWord());
         }else{
-            System.out.println("Well done! You guessed the word in " + (9-turns) + " turns!");
+            System.out.println("Well done! You guessed the word with " + (turns) + " turn(s) remainng!");
         }
     }
 }
