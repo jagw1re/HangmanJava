@@ -31,7 +31,7 @@ public class Main {
                     System.out.println("**********************");
                     break;
                 case GUESSED_WRONG:
-                    System.out.println(guess + " is not in the word! " + --turns + " turn(s) remain!");
+                    System.out.println(guess.toLowerCase() + " is not in the word! " + --turns + " turn(s) remain!");
                     hangman.displayWord();
                     System.out.println("---------------------");
                     System.out.println("You've incorrectly guessed:");
@@ -39,7 +39,9 @@ public class Main {
                     System.out.println("**********************");
                     break;
                 case NOT_A_CHAR:
+                    System.out.println("Illegitimate input! Please input a single letter.");
                     hangman.displayWord();
+                    System.out.println("**********************");
                     break;
                 case NOT_IN_WORD:
                     hangman.displayWord();
@@ -61,7 +63,7 @@ public class Main {
             System.out.println("You're out of turns!");
             System.out.println("The word was: " + hangman.getSelectedWord());
         }else{
-            System.out.println("Well done! You guessed the word with " + (turns) + " turn(s) remainng!");
+            System.out.println("Well done! You guessed the word with " + (turns) + " turn(s) remaining!");
         }
     }
 }
