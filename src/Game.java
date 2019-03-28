@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +68,7 @@ public class Game {
      * Provides the list of words without modification access.
      * @return wordList - The list of words.
      */
-    public ArrayList<String> getList(){
+    public List<String> getList(){
         return wordList;
     }
 
