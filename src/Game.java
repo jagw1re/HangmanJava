@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 public class Game {
 
     private static final HashMap<String, GuessResult> guessedChar;
-    private ArrayList<String> wordList = new ArrayList<>();
+    private List<String> wordList = new ArrayList<>();
     private String selectedWord;
 
     /**
@@ -32,36 +32,30 @@ public class Game {
     public Game(){}
 
     /**
-     * Allows the game to be run via user inputted words.
-     * @param inputList Contains the list of words a user may input.
+     * Allows the game to be run via a user inputted word.
+     * @param inputWord Contains the word a user may input.
      */
-    public Game(ArrayList<String> inputList){
-        this.wordList = inputList;
+    public Game(String inputWord){
+        this.selectedWord = inputWord;
     }
 
     /**
      * <p>Reads words from file and randomly selects one to be used in the game.</p>
      *
-     * <p>This method is only run if a user does not input their own words. It tries to search for
+     * <p>This method is only run if a user does not input their own word. It tries to search for
      * the words.txt file located in the res folder for words it can scan from. It then loops through
      * the file, adding each word to a list of words, for which it then randomly selects from. </p>
      * @throws FileNotFoundException If file is not present.
      */
-    public void scanWords(){
-        try {
-            File file = new File("res/words.txt");
-            Scanner wordScanner = new Scanner(file);
+    public void scanWords() throws FileNotFoundException{
+        File file = new File("res/words.txt");
+        Scanner wordScanner = new Scanner(file);
 
-            while(wordScanner.hasNext()){
-                String line = wordScanner.nextLine();
-                wordList.add(line);
-            }
-            selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
-
+        while(wordScanner.hasNext()){
+            String line = wordScanner.nextLine();
+            wordList.add(line);
         }
-        catch(FileNotFoundException exception){
-            System.out.println("Error: File not found!");
-        }
+        selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
     }
 
     /**
