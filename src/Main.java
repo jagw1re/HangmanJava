@@ -19,8 +19,6 @@ public class Main {
 
         Game hangman;
 
-        //FIXME: Non alphabetical words inputted break input system (ie. "what're")
-
         if(ownWord.toLowerCase().equals("y")){
             System.out.println("Enter your word below:");
             hangman = new Game(input.nextLine());
@@ -37,11 +35,11 @@ public class Main {
                 String word = input.nextLine();
                 hangman = new Game(word);
             }
-            System.out.println("You have 8 attempts to get it right. Go!");
-            hangman.analyseWord();
-            hangman.displayWord();
         }
 
+        System.out.println("You have 8 attempts to get it right. Go!");
+        hangman.analyseWord();
+        hangman.displayWord();
         System.out.println("**********************");
 
         while(turns > 0 && !hangman.isFinished()){
