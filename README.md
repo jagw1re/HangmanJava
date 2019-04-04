@@ -52,3 +52,7 @@ If yes, you may type any word (spaces & special characters included) and press e
 If no, the game will randomly select from a list of words supplied by the text file found in the res folder. By default, these words are movie names, however this can be changed by the user by modifying the words in the file(as long as each new phrase is on a new line).
 
 You can now begin typing letters. You have 8 turns to beat the game, good luck and have fun!
+
+## Documentation
+
+You can find the documentation at https://benwcarpenter.github.io/HangmanJava/allclasses-index.html
