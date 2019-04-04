@@ -2,8 +2,19 @@
 
 A game where a user can play hangman against a computer, using words randomly selected from a text file.
 
-### Running the game
-The game can be run using a terminal.  
+## Running the game
+The game is run using a terminal.
+
+Simply download the script, place it in your home folder and run it with the following commands (requires git and jdk:
+
+```bash
+chmod +x HangmanJava.sh
+./HangmanJava.sh
+```
+
+WARNING: THIS WILL DELETE FOLDERS CALLED HangmanJava IF PRESENT IN THE SAME DIRECTORY
+
+### Manual Installation
 
 First, clone the repository (requires git).
 
@@ -27,7 +38,7 @@ And finally, run the game with
 ```bash
 java -cp out Main
 ```
-### How to play
+## How to play
 When running the game, you will be prompted whether or not you wish to enter your own word. Simply type "y" for yes or "n" for no and press enter.  
 
 If yes, you may type any word (spaces & special characters included) and press enter.
