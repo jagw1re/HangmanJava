@@ -5,7 +5,13 @@ A game where a user can play hangman against a computer, using words randomly se
 ## Running the game
 The game is run using a terminal.
 
-Simply download the script, place it in your home folder and run it with the following commands (requires git and jdk:
+Simply download the script using a terminal:
+
+```bash
+curl -OL https://raw.githubusercontent.com/benwcarpenter/HangmanJava/master/HangmanJava.sh
+```
+
+Then run it with the following commands (requires git and jdk):
 
 ```bash
 chmod +x HangmanJava.sh
