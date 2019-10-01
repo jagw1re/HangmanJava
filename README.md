@@ -11,7 +11,7 @@ Simply download the script using a terminal:
 curl -OL https://raw.githubusercontent.com/benwcarpenter/HangmanJava/master/HangmanJava.sh
 ```
 
-Then run it with the following commands (requires git and jdk):
+Then run it with the following commands (requires [Git](https://git-scm.com/downloads "Git Download Page") and [JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html "JDK 12 Download Page")):
 
 ```bash
 chmod +x HangmanJava.sh
@@ -22,7 +22,7 @@ WARNING: THIS WILL DELETE FOLDERS CALLED HangmanJava IF PRESENT IN THE SAME DIRE
 
 ### Manual Installation
 
-First, clone the repository (requires git).
+First, clone the repository (requires [Git](https://git-scm.com/downloads "Git Download Page")).
 
 ```bash
 git clone https://github.com/benwcarpenter/HangmanJava.git
