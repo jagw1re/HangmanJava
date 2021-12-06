@@ -55,4 +55,4 @@ You can now begin typing letters. You have 8 turns to beat the game, good luck a
 
 ## Documentation
 
-You can find the documentation at https://jagwiredev.github.io/HangmanJava/allclasses-index.html
+You can find the documentation at https://jagwirecode.github.io/HangmanJava/Game.html
