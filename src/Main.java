@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * Main contains the main function of the program, and calls most of the Game class functionality.
  * Please see the {@link Game} class for functionality.
- * @author Ben Carpenter
+ * @author jagwirecode
  */
 public class Main {
     /**

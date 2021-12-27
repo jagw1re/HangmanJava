@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 
 /**
  * Game is the class used for running the core functions of the game.
- * @author Ben Carpenter
+ * @author jagwirecode
  */
 public class Game {
     /**
