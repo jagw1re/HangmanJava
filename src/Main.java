@@ -19,7 +19,7 @@ public class Main {
 
         Game hangman;
 
-        if(ownWord.toLowerCase().equals("y")){
+        if(ownWord.equalsIgnoreCase("y")){
             System.out.println("Enter your word below:");
             hangman = new Game(input.nextLine());
         }else{
@@ -44,39 +44,37 @@ public class Main {
 
         while(turns > 0 && !hangman.isFinished()){
             String guess = input.next();
-            switch(hangman.guessString(guess.toLowerCase())){
-                case GUESSED_SUCCESS:
+            switch (hangman.guessString(guess.toLowerCase())) {
+                case GUESSED_SUCCESS -> {
                     System.out.println("Correct! You still have " + turns + " turn(s) remaining!");
                     hangman.displayWord();
                     System.out.println("**********************");
-                    break;
-                case GUESSED_WRONG:
+                }
+                case GUESSED_WRONG -> {
                     System.out.println(guess.toLowerCase() + " is not in the word! " + --turns + " turn(s) remain!");
                     hangman.displayWord();
                     System.out.println("---------------------");
                     System.out.println("You've incorrectly guessed:");
                     hangman.showFailedGuesses();
                     System.out.println("**********************");
-                    break;
-                case NOT_A_CHAR:
+                }
+                case NOT_A_CHAR -> {
                     System.out.println("Illegitimate input! Please input a single letter.");
                     hangman.displayWord();
                     System.out.println("**********************");
-                    break;
-                case NOT_IN_WORD:
+                }
+                case NOT_IN_WORD -> {
                     hangman.displayWord();
                     System.out.println("---------------------");
                     hangman.showFailedGuesses();
                     System.out.println("**********************");
                     turns--;
-                    break;
-                case ALREADY_GUESSED:
+                }
+                case ALREADY_GUESSED -> {
                     hangman.displayWord();
                     System.out.println("**********************");
-                    break;
-                default:
-                    System.out.println("Unhandled case!");
-                    break;
+                }
+                default -> System.out.println("Unhandled case!");
             }
         }
         input.close();

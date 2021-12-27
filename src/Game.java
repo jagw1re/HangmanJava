@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 public class Game {
 
     private static final HashMap<String, GuessResult> guessedChar;
-    private List<String> wordList = new ArrayList<>();
+    private final List<String> wordList = new ArrayList<>();
     private String selectedWord;
 
     /**
@@ -106,21 +106,24 @@ public class Game {
      */
     public GuessResult guessString(String guess){
         if(guess.length() == 1 && guess.charAt(0) >= 'a' && guess.charAt(0) <= 'z'){
-            switch(guessedChar.get(guess)){
-                case NOT_GUESSED:
+            switch (guessedChar.get(guess)) {
+                case NOT_GUESSED -> {
                     guessedChar.replace(guess, GuessResult.GUESSED_SUCCESS);
                     return GuessResult.GUESSED_SUCCESS;
-                case NOT_IN_WORD:
+                }
+                case NOT_IN_WORD -> {
                     guessedChar.replace(guess, GuessResult.GUESSED_WRONG);
                     return GuessResult.GUESSED_WRONG;
-                case GUESSED_SUCCESS:
+                }
+                case GUESSED_SUCCESS -> {
                     System.out.println("You've already correctly guessed " + guess + "!");
                     return GuessResult.ALREADY_GUESSED;
-                case GUESSED_WRONG:
+                }
+                case GUESSED_WRONG -> {
                     System.out.println("You've already tried " + guess + "!");
                     return GuessResult.ALREADY_GUESSED;
-                    default:
-                        System.out.println("Unhandled error!");
+                }
+                default -> System.out.println("Unhandled error!");
             }
         }
         return GuessResult.NOT_A_CHAR;
@@ -177,7 +180,7 @@ public class Game {
     /**
      * <p>A set of every entry in the HashMap is produced, if any entry has NOT_GUESSED as its value,
      * the word has not been completed and as such is not finished.</p>
-     * @return Boolean - Tells game whether or not the word has been fully guessed.
+     * @return Boolean - Tells game whether the word has been fully guessed.
      */
     public boolean isFinished(){
         for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet()){
