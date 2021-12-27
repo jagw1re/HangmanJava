@@ -12,9 +12,17 @@ import java.io.FileNotFoundException;
  * @author Ben Carpenter
  */
 public class Game {
-
+    /**
+     * Contains the state of a given character's guess state
+     */
     private static final HashMap<String, GuessResult> guessedChar;
+    /**
+     * Holds the list of words that are read from an input file
+     */
     private final List<String> wordList = new ArrayList<>();
+    /**
+     * Selected word to be used in the game
+     */
     private String selectedWord;
 
     /**
@@ -29,6 +37,9 @@ public class Game {
         }
     }
 
+    /**
+     * Default constructor
+     */
     public Game(){}
 
     /**

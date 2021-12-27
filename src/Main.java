@@ -7,6 +7,10 @@ import java.util.Scanner;
  * @author Ben Carpenter
  */
 public class Main {
+    /**
+     * Main function of the program
+     * @param args - command line arguments (not supported)
+     */
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         int turns = 8;
