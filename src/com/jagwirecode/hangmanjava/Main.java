@@ -1,8 +1,10 @@
+package com.jagwirecode.hangmanjava;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Main contains the main function of the program, and calls most of the Game class functionality.
+ * Main contains the main function of the program, and calls most of the com.jagwirecode.hangmanjava.Game class functionality.
  * Please see the {@link Game} class for functionality.
  * @author jagwirecode
  */

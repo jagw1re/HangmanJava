@@ -1,3 +1,5 @@
+package com.jagwirecode.hangmanjava;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -204,7 +206,7 @@ public class Game {
     }
 
     /**
-     * <p>Provides a Game instance with the ability to manage the status of guessed letters etc.</p>
+     * <p>Provides a com.jagwirecode.hangmanjava.Game instance with the ability to manage the status of guessed letters etc.</p>
      */
     enum GuessResult{
         /**

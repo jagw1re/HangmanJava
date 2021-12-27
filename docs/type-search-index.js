@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Game"},{"p":"<Unnamed>","l":"Game.GuessResult"},{"p":"<Unnamed>","l":"Main"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.jagwirecode.hangmanjava","l":"Game"},{"p":"com.jagwirecode.hangmanjava","l":"Game.GuessResult"},{"p":"com.jagwirecode.hangmanjava","l":"Main"}];updateSearchResults();
