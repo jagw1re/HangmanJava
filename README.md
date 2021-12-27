@@ -2,16 +2,20 @@
 
 A game where a user can play hangman against a computer, using words randomly selected from a text file.
 
+## Requirements
+You will need the following to pull, build and run the game:
+- [JDK 15 or higher](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html "JDK download page")
+- [Any version of Git released in the last 5 years](https://git-scm.com/downloads "Git Download Page")
 ## Running the game
 The game is run using a terminal.
 
 Simply download the script using a terminal:
 
 ```bash
-curl -OL https://raw.githubusercontent.com/benwcarpenter/HangmanJava/master/HangmanJava.sh
+curl -OL https://raw.githubusercontent.com/jagwirecode/HangmanJava/master/HangmanJava.sh
 ```
 
-Then run it with the following commands (requires [Git](https://git-scm.com/downloads "Git Download Page") and [JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html "JDK 12 Download Page")):
+Then run it with the following commands
 
 ```bash
 chmod +x HangmanJava.sh
@@ -22,10 +26,10 @@ WARNING: THIS WILL DELETE FOLDERS CALLED HangmanJava IF PRESENT IN THE SAME DIRE
 
 ### Manual Installation
 
-First, clone the repository (requires [Git](https://git-scm.com/downloads "Git Download Page")).
+First, clone the repository
 
 ```bash
-git clone https://github.com/benwcarpenter/HangmanJava.git
+git clone https://github.com/jagwirecode/HangmanJava.git
 ```
 Then go to the directory:
 
@@ -33,7 +37,7 @@ Then go to the directory:
 cd HangmanJava
 ```
 
-Compile the java files (requires [JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html "JDK 12 Download Page"))
+Compile the java files
 
 ```bash
 javac -d out src/*.java
@@ -45,7 +49,7 @@ And finally, run the game with
 java -cp out Main
 ```
 ## How to play
-When running the game, you will be prompted whether or not you wish to enter your own word. Simply type "y" for yes or "n" for no and press enter.  
+When running the game, you will be prompted whether you wish to enter your own word. Simply type "y" for yes or "n" for no and press enter.  
 
 If yes, you may type any word (spaces & special characters included) and press enter.
 
