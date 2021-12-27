@@ -60,11 +60,12 @@ public class Game {
      */
     public void scanWords() throws FileNotFoundException{
         File file = new File("res/words.txt");
-        Scanner wordScanner = new Scanner(file);
+        try (Scanner wordScanner = new Scanner(file)) {
 
-        while(wordScanner.hasNext()){
-            String line = wordScanner.nextLine();
-            wordList.add(line);
+            while (wordScanner.hasNext()) {
+                String line = wordScanner.nextLine();
+                wordList.add(line);
+            }
         }
         selectedWord = wordList.get(RAND.nextInt(0,(wordList.size())));
     }
@@ -81,7 +82,7 @@ public class Game {
      * Prints the list of words.
      * @param wordList Parsed in such that it can be printed.
      */
-    public void printList(ArrayList<String> wordList){
+    public void printList(List<String> wordList){
         for(String words : wordList){
             System.out.println(words);
         }

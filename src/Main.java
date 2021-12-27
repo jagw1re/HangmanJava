@@ -14,6 +14,7 @@ public class Main {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         int turns = 8;
+        final String formatter = "**********************";
 
         System.out.println("Welcome to a game of Hangman!");
         System.out.println("*******************************");
@@ -44,7 +45,7 @@ public class Main {
         System.out.println("You have 8 attempts to get it right. Go!");
         hangman.analyseWord();
         hangman.displayWord();
-        System.out.println("**********************");
+        System.out.println(formatter);
 
         while(turns > 0 && !hangman.isFinished()){
             String guess = input.next();
@@ -52,7 +53,7 @@ public class Main {
                 case GUESSED_SUCCESS -> {
                     System.out.println("Correct! You still have " + turns + " turn(s) remaining!");
                     hangman.displayWord();
-                    System.out.println("**********************");
+                    System.out.println(formatter);
                 }
                 case GUESSED_WRONG -> {
                     System.out.println(guess.toLowerCase() + " is not in the word! " + --turns + " turn(s) remain!");
@@ -60,23 +61,23 @@ public class Main {
                     System.out.println("---------------------");
                     System.out.println("You've incorrectly guessed:");
                     hangman.showFailedGuesses();
-                    System.out.println("**********************");
+                    System.out.println(formatter);
                 }
                 case NOT_A_CHAR -> {
                     System.out.println("Illegitimate input! Please input a single letter.");
                     hangman.displayWord();
-                    System.out.println("**********************");
+                    System.out.println(formatter);
                 }
                 case NOT_IN_WORD -> {
                     hangman.displayWord();
                     System.out.println("---------------------");
                     hangman.showFailedGuesses();
-                    System.out.println("**********************");
+                    System.out.println(formatter);
                     turns--;
                 }
                 case ALREADY_GUESSED -> {
                     hangman.displayWord();
-                    System.out.println("**********************");
+                    System.out.println(formatter);
                 }
                 default -> System.out.println("Unhandled case!");
             }
