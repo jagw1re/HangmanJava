@@ -8,7 +8,7 @@ if [ -d HangmanJava ]; then
 fi
 
 #Clone repository
-echo $(git clone https://github.com/benwcarpenter/HangmanJava.git)
+echo $(git clone https://github.com/jagwirecode/HangmanJava.git)
 
 #Move to directory
 cd HangmanJava
