@@ -8,17 +8,17 @@ if [ -d HangmanJava ]; then
 fi
 
 #Clone repository
-echo $(git clone https://github.com/jagwirecode/HangmanJava.git)
+git clone https://github.com/jagwirecode/HangmanJava.git
 
 #Move to directory
-cd HangmanJava
+cd HangmanJava || exit
 
 #Compile java files
 echo "Compiling..."
-javac -d out src/*.java
+javac -d out src/com/jagwirecode/hangmanjava/*.java
 echo
 
 #Run class files
 echo "Running game!"
-java -cp out Main
+java -cp out com.jagwirecode.hangmanjava.Main
 echo
