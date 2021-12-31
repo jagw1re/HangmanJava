@@ -19,11 +19,12 @@ public class Main {
     private static Game getInput(Scanner input)
     {
         String word;
-        do{
+        do
+        {
             System.out.println("Please input the word to be guessed, using only letters, with words separated by a " +
                     "single space:");
             word = input.nextLine();
-        }while(word.isBlank() || !word.matches("^[ A-Za-z]+$"));
+        } while(word.isBlank() || !word.matches("^[ A-Za-z]+$"));
 
         return new Game(word.toLowerCase().trim());
     }
@@ -45,14 +46,20 @@ public class Main {
 
         Game hangman;
 
-        if(inputModeString.equalsIgnoreCase("y")){
+        if(inputModeString.equalsIgnoreCase("y"))
+        {
             hangman = getInput(input);
-        }else{
+        }
+        else
+        {
             hangman = new Game();
-            try{
+            try
+            {
                 hangman.scanWords();
                 System.out.println("The word is a movie title and is shown below:");
-            }catch(FileNotFoundException exception){
+            }
+            catch(FileNotFoundException exception)
+            {
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 System.out.println("     Error! File Not Found!    ");
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -67,9 +74,11 @@ public class Main {
         hangman.displayWord();
         System.out.println(formatter);
 
-        while(turns > 0 && !hangman.isFinished()){
+        while(turns > 0 && !hangman.isFinished())
+        {
             String guess = input.next();
-            switch (hangman.guessString(guess.toLowerCase())) {
+            switch (hangman.guessString(guess.toLowerCase()))
+            {
                 case GUESSED_SUCCESS -> {
                     System.out.println("Correct! You still have " + turns + " turn(s) remaining!");
                     hangman.displayWord();
@@ -103,10 +112,13 @@ public class Main {
             }
         }
         input.close();
-        if(turns == 0) {
+        if(turns == 0)
+        {
             System.out.println("You're out of turns!");
             System.out.println("The word was: " + hangman.getSelectedWord());
-        }else{
+        }
+        else
+        {
             System.out.println("Well done! You guessed the word with " + (turns) + " turn(s) remaining!");
         }
     }

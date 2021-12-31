@@ -30,11 +30,13 @@ public class Game {
     /**
      * Random number generator isolated to current thread (thread-safe).
      */
-    public static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
+    private static final ThreadLocalRandom RAND = ThreadLocalRandom.current();
 
-    static{
+    static
+    {
         guessedChar = new HashMap<>();
-        for(char c = 'a'; c <= 'z'; c++){
+        for(char c = 'a'; c <= 'z'; c++)
+        {
             guessedChar.put(String.valueOf(c),GuessResult.NOT_IN_WORD);
         }
     }
@@ -60,11 +62,13 @@ public class Game {
      * the file, adding each word to a list of words, for which it then randomly selects from. </p>
      * @throws FileNotFoundException If file is not present.
      */
-    public void scanWords() throws FileNotFoundException{
+    protected void scanWords() throws FileNotFoundException
+    {
         File file = new File("res/words.txt");
-        try (Scanner wordScanner = new Scanner(file)) {
-
-            while (wordScanner.hasNext()) {
+        try (Scanner wordScanner = new Scanner(file))
+        {
+            while (wordScanner.hasNext())
+            {
                 String line = wordScanner.nextLine();
                 wordList.add(line);
             }
@@ -84,8 +88,10 @@ public class Game {
      * Prints the list of words.
      * @param wordList Parsed in such that it can be printed.
      */
-    public void printList(List<String> wordList){
-        for(String words : wordList){
+    public void printList(List<String> wordList)
+    {
+        for(String words : wordList)
+        {
             System.out.println(words);
         }
     }
@@ -97,11 +103,14 @@ public class Game {
      * For letters, the HashMap has their value updated to NOT_GUESSED which is used when printing the word
      * in guessString.</p>
      */
-    public void analyseWord(){
+    protected void analyseWord()
+    {
         char[] word = selectedWord.toCharArray();
 
-        for(char c : word){
-            if(c >= 'a' && c <= 'z') {
+        for(char c : word)
+        {
+            if(c >= 'a' && c <= 'z')
+            {
                 guessedChar.put(String.valueOf(c), GuessResult.NOT_GUESSED);
             }
         }
@@ -118,9 +127,12 @@ public class Game {
      * @param guess String input by the user.
      * @return GuessResult - enum that has multiple values to reflect the state of the guess. See {@link GuessResult} for more info.
      */
-    public GuessResult guessString(String guess){
-        if(guess.length() == 1 && guess.charAt(0) >= 'a' && guess.charAt(0) <= 'z'){
-            switch (guessedChar.get(guess)) {
+    public GuessResult guessString(String guess)
+    {
+        if(guess.length() == 1 && guess.charAt(0) >= 'a' && guess.charAt(0) <= 'z')
+        {
+            switch (guessedChar.get(guess))
+            {
                 case NOT_GUESSED -> {
                     guessedChar.replace(guess, GuessResult.GUESSED_SUCCESS);
                     return GuessResult.GUESSED_SUCCESS;
@@ -149,20 +161,25 @@ public class Game {
      * the value is GUESSED_SUCCESS, the letter is printed. If it is NOT_GUESSED, an underscore is printed.
      * Any other item in the word is printed as is (spaces, apostrophes etc)</p>
      */
-    public void displayWord() {
+    public void displayWord()
+    {
         char[] strToArray = selectedWord.toCharArray();
 
-        for(int i = 0; i < selectedWord.length(); i++){
+        for(int i = 0; i < selectedWord.length(); i++)
+        {
             String letter = String.valueOf(strToArray[i]);
             if(guessedChar.containsKey(letter)){
-                if(guessedChar.get(letter) == GuessResult.GUESSED_SUCCESS){
+                if(guessedChar.get(letter) == GuessResult.GUESSED_SUCCESS)
+                {
                     System.out.print(letter);
                 }
-                else if(guessedChar.get(letter) == GuessResult.NOT_GUESSED){
+                else if(guessedChar.get(letter) == GuessResult.NOT_GUESSED)
+                {
                     System.out.print("_");
                 }
             }
-            else{
+            else
+            {
                 System.out.print(letter);
             }
         }
@@ -174,9 +191,12 @@ public class Game {
      * <p>The set is looped through, with each key-value pair being checked for GUESSED_WRONG, where it is printed
      * if present.</p>
      */
-    public void showFailedGuesses() {
-        for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet()){
-            if(letters.getValue() == GuessResult.GUESSED_WRONG){
+    public void showFailedGuesses()
+    {
+        for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet())
+        {
+            if(letters.getValue() == GuessResult.GUESSED_WRONG)
+            {
                 System.out.printf("%-5s", letters.getKey());
             }
         }
@@ -196,9 +216,12 @@ public class Game {
      * the word has not been completed and as such is not finished.</p>
      * @return Boolean - Tells game whether the word has been fully guessed.
      */
-    public boolean isFinished(){
-        for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet()){
-            if(letters.getValue() == GuessResult.NOT_GUESSED){
+    public boolean isFinished()
+    {
+        for(Map.Entry<String, GuessResult> letters : guessedChar.entrySet())
+        {
+            if(letters.getValue() == GuessResult.NOT_GUESSED)
+            {
                 return false;
             }
         }
@@ -208,7 +231,8 @@ public class Game {
     /**
      * <p>Provides a com.jagwirecode.hangmanjava.Game instance with the ability to manage the status of guessed letters etc.</p>
      */
-    enum GuessResult{
+    protected enum GuessResult
+    {
         /**
          * Used when a letter has been guessed correctly.
          */
