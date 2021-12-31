@@ -10,6 +10,25 @@ import java.util.Scanner;
  */
 public class Main {
     /**
+     * Retrieves input word from user, making them retry if it does not meet the following conditions:
+     * - Only letters
+     * - Words separated by one space only
+     * @param input - Scanner to use for input
+     * @return - New Game object using inputted word
+     */
+    private static Game getInput(Scanner input)
+    {
+        String word;
+        do{
+            System.out.println("Please input the word to be guessed, using only letters, with words separated by a " +
+                    "single space:");
+            word = input.nextLine();
+        }while(word.isBlank() || !word.matches("^[ A-Za-z]+$"));
+
+        return new Game(word.toLowerCase().trim());
+    }
+
+    /**
      * Main function of the program
      * @param args - command line arguments (not supported)
      */
@@ -21,14 +40,13 @@ public class Main {
         System.out.println("Welcome to a game of Hangman!");
         System.out.println("*******************************");
         System.out.println("Would you like to enter your own word? Y/n");
-        String ownWord = input.next();
+        String inputModeString = input.next();
         input.nextLine();
 
         Game hangman;
 
-        if(ownWord.equalsIgnoreCase("y")){
-            System.out.println("Enter your word below:");
-            hangman = new Game(input.nextLine());
+        if(inputModeString.equalsIgnoreCase("y")){
+            hangman = getInput(input);
         }else{
             hangman = new Game();
             try{
@@ -38,7 +56,7 @@ public class Main {
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 System.out.println("     Error! File Not Found!    ");
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                System.out.println("Please enter a word instead:");
+                System.out.println("To proceed, you must input a word instead.");
                 String word = input.nextLine();
                 hangman = new Game(word);
             }
