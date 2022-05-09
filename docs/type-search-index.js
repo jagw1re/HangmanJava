@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.jagwirecode.hangmanjava","l":"Game"},{"p":"com.jagwirecode.hangmanjava","l":"Game.GuessResult"},{"p":"com.jagwirecode.hangmanjava","l":"Main"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.jagwirecode.hangmanjava","l":"Game"},{"p":"com.jagwirecode.hangmanjava","l":"Game.GuessResult"},{"p":"com.jagwirecode.hangmanjava","l":"Main"}];updateSearchResults();
