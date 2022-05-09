@@ -115,8 +115,7 @@ public class Main {
             System.out.println("The word was: " + hangman.getSelectedWord());
         } else {
             System.out.println("Well done! You guessed the word with "
-                  + (turns)
-                  + " turn(s) remaining!");
+                  + (turns) + " turn(s) remaining!");
         }
     }
 }
