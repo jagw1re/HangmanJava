@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Please see the {@link Game} class for functionality.
  *
  * @author jagwirecode
- *
  */
 public class Main {
     /**
